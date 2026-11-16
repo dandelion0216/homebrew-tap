@@ -21,6 +21,7 @@ class GhosttyTailor < Formula
     inreplace contents/"Info.plist", "0.0.0", version.to_s
     # Ad-hoc sign the whole bundle so its signature covers Info.plist and the icon.
     system "codesign", "--force", "--sign", "-", prefix/"ghostty-tailor.app"
+    prefix.install "THIRD_PARTY_NOTICES.md"
 
     (bin/"ghostty-tailor").write <<~SH
       #!/bin/sh
