@@ -18,11 +18,9 @@ class GhosttyTailor < Formula
     ENV["CGO_ENABLED"] = "1"
     prefix.install "THIRD_PARTY_NOTICES.md"
 
-    on_linux do
+    if OS.linux?
       system "go", "build", *std_go_args(tags: %w[desktop production webkit2_41])
-    end
-
-    on_macos do
+    else
       # Built from source on the user's Mac, so the app is not quarantined and
       # Gatekeeper does not block it even though it is not notarized.
       ENV["CGO_LDFLAGS"] = "-framework UniformTypeIdentifiers"
@@ -58,7 +56,7 @@ class GhosttyTailor < Formula
 
   test do
     assert_predicate bin/"ghostty-tailor", :executable?
-    on_macos do
+    if OS.mac?
       assert_predicate prefix/"ghostty-tailor.app/Contents/MacOS/ghostty-tailor", :executable?
     end
   end
