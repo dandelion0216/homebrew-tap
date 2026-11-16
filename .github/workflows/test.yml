@@ -24,10 +24,11 @@ jobs:
       - name: Style
         run: brew style ./Formula/ghostty-tailor.rb
 
+      # setup-homebrew links this checkout as the dandelion0216/tap tap.
       - name: Install from this checkout
         run: |
-          brew install --build-from-source ./Formula/ghostty-tailor.rb
-          brew test ./Formula/ghostty-tailor.rb
+          brew install --build-from-source dandelion0216/tap/ghostty-tailor
+          brew test dandelion0216/tap/ghostty-tailor
           ls "$(brew --prefix ghostty-tailor)"
 
       - name: Launch (Linux)
