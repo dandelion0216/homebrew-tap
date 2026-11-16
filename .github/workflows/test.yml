@@ -1,0 +1,39 @@
+name: Test formula
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: brew install (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: Homebrew/actions/setup-homebrew@main
+
+      - name: Style
+        run: brew style ./Formula/ghostty-tailor.rb
+
+      - name: Install from this checkout
+        run: |
+          brew install --build-from-source ./Formula/ghostty-tailor.rb
+          brew test ./Formula/ghostty-tailor.rb
+          ls "$(brew --prefix ghostty-tailor)"
+
+      - name: Launch (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update && sudo apt-get install -y xvfb
+          code=0
+          xvfb-run -a timeout 10 ghostty-tailor || code=$?
+          test "$code" -eq 124
