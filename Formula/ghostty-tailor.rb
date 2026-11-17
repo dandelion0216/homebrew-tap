@@ -1,8 +1,8 @@
 class GhosttyTailor < Formula
   desc "GUI for tailoring your Ghostty configuration"
   homepage "https://github.com/dandelion0216/ghostty-tailor"
-  url "https://github.com/dandelion0216/ghostty-tailor/archive/refs/tags/v0.4.0.tar.gz"
-  sha256 "a482c63ec1379fd20ef0a0aeebb86c41025eef45426ad5bb51ca37c688d86104"
+  url "https://github.com/dandelion0216/ghostty-tailor/archive/refs/tags/v0.4.1.tar.gz"
+  sha256 "1d4d301ee261d3ef403e908fd00d830f3367f131963735fb129375118eb59652"
   license "MIT"
   head "https://github.com/dandelion0216/ghostty-tailor.git", branch: "main"
 
